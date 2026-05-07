@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formation Vidéo IA — Produisez en interne ou commandez en sachant ce que vous achetez</title>
+<meta name="description" content="Comprenez les vrais usages de l'IA vidéo, produisez en interne ou challengez vos agences. Formation 1, 3 ou 5 jours pour responsables com et marketing.">
+<link href="https://fonts.bunny.net/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- Bunny Fonts : hébergé en UE, conforme RGPD — aucun transfert de données hors UE -->
+<style>
+:root {
+  --navy: #0F1B2D;
+  --navy-light: #1A2B45;
+  --blue: #3DBFB0;
+  --blue-light: #4DD9C8;
+  --blue-dark: #2FA89A;
+  --gold: #D97706;
+  --gold-light: #F59E0B;
+  --green: #059669;
+  --violet: #7C3AED;
+  --gray-50: #F8FAFC;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-400: #94A3B8;
+  --gray-500: #64748B;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1E293B;
+  --gray-900: #0F172A;
+  --white: #FFFFFF;
+  --red: #DC2626;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--gray-800); line-height: 1.6; background: var(--white); -webkit-font-smoothing: antialiased; }
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+/* ── TOP BAR ── */
+.topbar { background: var(--navy); color: var(--white); text-align: center; padding: 10px 24px; font-size: 14px; font-weight: 500; letter-spacing: 0.3px; }
+.topbar span { color: var(--gold-light); font-weight: 700; }
+
+/* ── NAV ── */
+.nav { background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+.nav-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo img { height: 36px; width: auto; }
+.logo span { font-size: 18px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; }
+.nav-cta { background: var(--blue); color: var(--white); padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s; }
+.nav-cta:hover { background: var(--blue-dark); }
+
+/* ── HERO ── */
+.hero { background: linear-gradient(175deg, var(--navy) 0%, var(--navy-light) 100%); color: var(--white); padding: 80px 24px 100px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(61,191,176,0.12) 0%, transparent 70%); }
+.hero::after { content: ''; position: absolute; bottom: -200px; left: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(217,119,6,0.08) 0%, transparent 70%); }
+.hero-content { position: relative; z-index: 2; max-width: 720px; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(61,191,176,0.12); border: 1px solid rgba(61,191,176,0.25); border-radius: 50px; padding: 6px 16px; font-size: 13px; font-weight: 600; color: var(--blue-light); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
+.hero-badge .dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.hero h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 900; line-height: 1.12; margin-bottom: 20px; letter-spacing: -1px; }
+.hero h1 .accent { color: var(--blue-light); }
+.hero h1 .accent2 { color: var(--gold-light); }
+.hero .subtitle { font-size: clamp(16px, 2.5vw, 19px); color: var(--gray-400); line-height: 1.65; margin-bottom: 32px; max-width: 600px; }
+.hero-cta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: var(--white); padding: 16px 32px; border-radius: 10px; font-size: 16px; font-weight: 700; text-decoration: none; transition: all 0.3s; box-shadow: 0 4px 14px rgba(61,191,176,0.35); }
+.btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(61,191,176,0.4); }
+.btn-primary svg { width: 18px; height: 18px; }
+.hero-note { font-size: 13px; color: var(--gray-500); }
+.hero-stats { display: flex; gap: 40px; margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); }
+.hero-stat .number { font-size: 32px; font-weight: 800; color: var(--white); }
+.hero-stat .label { font-size: 13px; color: var(--gray-400); margin-top: 2px; }
+
+/* ── LOGOS ── */
+.logos { padding: 48px 24px; background: var(--gray-50); border-bottom: 1px solid var(--gray-200); }
+.logos-title { text-align: center; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--gray-500); margin-bottom: 28px; }
+.logos-grid { display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; opacity: 0.5; }
+.logos-grid span { font-size: 18px; font-weight: 700; color: var(--gray-700); letter-spacing: -0.3px; }
+
+/* ── SECTIONS ── */
+.section-label { display: inline-block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--blue); margin-bottom: 12px; }
+.section-title { font-size: clamp(24px, 4vw, 36px); font-weight: 800; color: var(--gray-900); margin-bottom: 16px; letter-spacing: -0.5px; line-height: 1.2; }
+.section-subtitle { font-size: 17px; color: var(--gray-600); max-width: 620px; margin-bottom: 48px; }
+
+/* ── PAIN POINTS ── */
+.pain { padding: 80px 24px; }
+.pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.pain-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 28px; transition: all 0.2s; }
+.pain-card:hover { border-color: var(--gray-400); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.pain-card .icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+.pain-card .icon.red { background: #FEF2F2; }
+.pain-card h3 { font-size: 17px; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
+.pain-card p { font-size: 15px; color: var(--gray-600); line-height: 1.6; }
+
+/* ── BEFORE/AFTER ── */
+.before-after { padding: 80px 24px; background: var(--gray-50); }
+.ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 860px; margin: 0 auto; }
+.ba-col { border-radius: 16px; padding: 32px; }
+.ba-col.before { background: var(--white); border: 2px solid #FECACA; }
+.ba-col.after { background: var(--white); border: 2px solid #A7F3D0; }
+.ba-label { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; padding: 4px 12px; border-radius: 6px; }
+.ba-col.before .ba-label { background: #FEF2F2; color: #DC2626; }
+.ba-col.after .ba-label { background: #ECFDF5; color: #059669; }
+.ba-col ul { list-style: none; }
+.ba-col ul li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: var(--gray-700); padding: 10px 0; line-height: 1.5; border-bottom: 1px solid var(--gray-100); }
+.ba-col ul li:last-child { border-bottom: none; }
+.ba-col ul li .ico { font-size: 18px; flex-shrink: 0; line-height: 1.4; }
+
+/* ── BENEFITS ── */
+.solution { padding: 80px 24px; }
+.benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.benefit-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 32px; position: relative; overflow: hidden; }
+.benefit-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--blue); }
+.benefit-card .metric { font-size: 40px; font-weight: 900; color: var(--navy); line-height: 1; margin-bottom: 4px; }
+.benefit-card .metric-label { font-size: 15px; font-weight: 600; color: var(--blue); margin-bottom: 12px; }
+.benefit-card p { font-size: 15px; color: var(--gray-600); line-height: 1.6; }
+
+/* ── VIDEO ── */
+.video-section { padding: 80px 24px; background: var(--gray-50); }
+
+/* ── FORMATS ── */
+.formats { padding: 80px 24px; }
+.formats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 960px; margin: 0 auto; }
+.format-card { background: var(--white); border: 2px solid var(--gray-200); border-radius: 16px; padding: 32px; position: relative; transition: all 0.3s; }
+.format-card:hover { border-color: var(--blue); box-shadow: 0 8px 24px rgba(61,191,176,0.1); }
+.format-card.featured { border-color: var(--blue); box-shadow: 0 8px 24px rgba(61,191,176,0.12); }
+.format-card.featured::after { content: 'Le plus demandé'; position: absolute; top: -1px; right: 24px; background: var(--blue); color: var(--white); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 0 0 8px 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.format-duration { font-size: 14px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.format-card h3 { font-size: 20px; font-weight: 800; color: var(--gray-900); margin-bottom: 8px; }
+.format-card .format-hook { font-size: 14px; color: var(--gray-600); margin-bottom: 20px; line-height: 1.5; font-style: italic; }
+.format-card ul { list-style: none; margin-bottom: 24px; }
+.format-card ul li { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: var(--gray-700); padding: 6px 0; line-height: 1.5; }
+.format-card ul li svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; }
+.format-cta { display: block; text-align: center; background: var(--blue); color: var(--white); padding: 14px 24px; border-radius: 10px; font-weight: 700; font-size: 15px; text-decoration: none; transition: all 0.2s; }
+.format-cta:hover { background: var(--blue-dark); }
+.format-card.featured .format-cta { box-shadow: 0 4px 14px rgba(61,191,176,0.3); }
+
+/* ── TOOLS ── */
+.tools { padding: 56px 24px; background: var(--gray-50); }
+.tools-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+.tools-label { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--gray-500); margin-bottom: 20px; }
+.tools-grid { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.tool-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 50px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: var(--gray-700); }
+
+/* ── TESTIMONIALS ── */
+.testimonials { padding: 80px 24px; }
+.testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.testimonial-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 28px; }
+.stars { color: var(--gold-light); font-size: 16px; margin-bottom: 12px; letter-spacing: 2px; }
+.testimonial-card blockquote { font-size: 15px; color: var(--gray-700); line-height: 1.7; font-style: italic; margin-bottom: 16px; }
+.testimonial-author { display: flex; align-items: center; gap: 12px; }
+.author-avatar { width: 40px; height: 40px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.author-avatar svg { width: 20px; height: 20px; }
+.author-info .name { font-size: 14px; font-weight: 700; color: var(--gray-900); }
+.author-info .role { font-size: 13px; color: var(--gray-500); }
+
+/* ── COMPLIANCE ── */
+.compliance { padding: 64px 24px; background: var(--gray-50); border-top: 1px solid var(--gray-200); }
+.compliance-inner { max-width: 800px; margin: 0 auto; display: flex; gap: 32px; align-items: flex-start; }
+.compliance-icon { width: 56px; height: 56px; background: #EFF6FF; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.compliance-icon svg { width: 28px; height: 28px; }
+.compliance-body h3 { font-size: 18px; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
+.compliance-body p { font-size: 15px; color: var(--gray-600); line-height: 1.7; }
+.compliance-badges { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+.compliance-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 600; color: var(--gray-700); }
+.compliance-badge svg { width: 16px; height: 16px; fill: var(--green); }
+@media (max-width: 640px) { .compliance-inner { flex-direction: column; } }
+
+/* ── FAQ ── */
+.faq { padding: 80px 24px; }
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--gray-200); padding: 24px 0; }
+.faq-item summary { font-size: 16px; font-weight: 600; color: var(--gray-900); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.faq-item summary::after { content: '+'; font-size: 22px; color: var(--gray-400); font-weight: 300; }
+.faq-item[open] summary::after { content: '−'; }
+.faq-item p { margin-top: 12px; font-size: 15px; color: var(--gray-600); line-height: 1.7; padding-right: 32px; }
+
+/* ── FINAL CTA ── */
+.final-cta { padding: 80px 24px; background: var(--navy); color: var(--white); text-align: center; position: relative; overflow: hidden; }
+.final-cta::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(61,191,176,0.12) 0%, transparent 70%); }
+.final-cta .container { position: relative; z-index: 2; }
+.final-cta h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px; }
+.final-cta .desc { font-size: 17px; color: var(--gray-400); margin-bottom: 12px; max-width: 540px; margin-left: auto; margin-right: auto; }
+.urgency { display: inline-flex; align-items: center; gap: 8px; background: rgba(220,38,38,0.12); border: 1px solid rgba(220,38,38,0.25); color: #FCA5A5; padding: 8px 20px; border-radius: 50px; font-size: 14px; font-weight: 600; margin-bottom: 28px; }
+.urgency .dot-red { width: 8px; height: 8px; background: var(--red); border-radius: 50%; animation: pulse 1.5s ease-in-out infinite; }
+.final-cta .btn-primary { font-size: 18px; padding: 18px 40px; }
+.final-note { margin-top: 16px; font-size: 13px; color: var(--gray-500); }
+.guarantee { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; font-size: 13px; color: var(--gray-400); }
+.guarantee svg { width: 16px; height: 16px; fill: var(--green); }
+
+/* ── FOOTER ── */
+footer { text-align: center; padding: 32px 24px; font-size: 13px; color: var(--gray-500); border-top: 1px solid var(--gray-200); }
+footer .legal-links { margin-top: 12px; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+footer .legal-links a { color: var(--gray-400); text-decoration: none; }
+footer .legal-links a:hover { color: var(--gray-700); }
+footer .rgpd-note { margin-top: 12px; font-size: 12px; color: var(--gray-400); max-width: 600px; margin-left: auto; margin-right: auto; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .hero-stats { flex-direction: column; gap: 20px; }
+  .hero-cta-row { flex-direction: column; align-items: flex-start; }
+  .logos-grid { gap: 24px; }
+  .pain-grid, .benefits-grid, .testimonial-grid, .formats-grid { grid-template-columns: 1fr; }
+  .ba-grid { grid-template-columns: 1fr; }
+  .tools-grid { gap: 8px; }
+  .tool-chip { font-size: 13px; padding: 8px 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  Déjà +400 professionnels formés — <span>Session découverte offerte cette semaine</span>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo"><img src="logo.png" alt="Les Inarrêtables"><span>Les Inarrêtables</span></a>
+    <a href="https://tidycal.com/les-inarretables/session-decouverte-ia-generative-and-strategie-digitale-m82kdyr" class="nav-cta">Réserver ma session</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO — 2 besoins profonds :
+     1. "On veut produire nos vidéos IA en interne au lieu de payer une agence"
+     2. "On veut comprendre l'IA vidéo pour mieux commander et connaître les vrais usages"
+     ═══════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span> Formation IA — Vidéo & Contenu Visuel</div>
+      <h1>Vidéo IA : <span class="accent">produisez en interne</span> ou <span class="accent2">commandez en sachant ce que vous achetez</span></h1>
+      <p class="subtitle">Vos services com commandent déjà des vidéos IA en agence. Certains veulent les créer en interne. D'autres veulent comprendre les vrais usages et limites pour mieux piloter. Notre formation couvre les deux. En 1, 3 ou 5 jours.</p>
+      <div class="hero-cta-row">
+        <a href="https://tidycal.com/les-inarretables/session-decouverte-ia-generative-and-strategie-digitale-m82kdyr" class="btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Réserver ma session découverte
+        </a>
+        <span class="hero-note">Gratuit · 20 min · On vous montre un exemple concret</span>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="number">+400</div>
+          <div class="label">professionnels formés</div>
+        </div>
+        <div class="hero-stat">
+          <div class="number">÷5</div>
+          <div class="label">le coût de production vidéo</div>
+        </div>
+        <div class="hero-stat">
+          <div class="number">4.9/5</div>
+          <div class="label">satisfaction participants</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<section class="logos">
+  <p class="logos-title">Ils nous ont fait confiance</p>
+  <div class="logos-grid">
+    <span>Veolia</span>
+    <span>Vinci Autoroutes</span>
+    <span>CPAM</span>
+    <span>France Travail</span>
+    <span>Comexposium</span>
+    <span>Banque Populaire</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     DOULEURS — 2 situations réelles que vivent les prospects
+     ═══════════════════════════════════════════════════════ -->
+<section class="pain">
+  <div class="container">
+    <div class="section-label">Vous vous reconnaissez ?</div>
+    <h2 class="section-title">L'IA vidéo est partout. Mais vous naviguez à vue.</h2>
+    <p class="section-subtitle">Vos agences vous vendent de la vidéo IA. Vos concurrents en publient. Vous, vous vous demandez par où commencer — ou si ce qu'on vous vend vaut vraiment le prix.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="icon red">💸</div>
+        <h3>« Notre agence facture 5 000 € une vidéo qu'elle génère en 2h avec l'IA »</h3>
+        <p>Vous le soupçonnez : les agences utilisent l'IA mais facturent au prix du workflow traditionnel. Sans comprendre la technologie, vous ne pouvez pas challenger les devis ni savoir ce que vous payez réellement.</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon red">🤔</div>
+        <h3>« Je ne sais pas ce que l'IA fait bien et ce qu'elle fait mal »</h3>
+        <p>Quand utiliser l'IA ? Quand vaut-il mieux tourner ? Quelles sont les vraies limites de qualité ? Sans formation, vous prenez des décisions à l'aveugle sur votre budget com.</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon red">⏰</div>
+        <h3>« On aimerait produire en interne mais on ne sait pas par où commencer »</h3>
+        <p>Vous voyez le potentiel : créer des vidéos sans tourner, réduire les délais, publier plus souvent. Mais entre les 50 outils IA disponibles et le manque de méthode, rien n'avance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     AVANT / APRÈS — 2 colonnes, 2 transformations selon le profil
+     ═══════════════════════════════════════════════════════ -->
+<section class="before-after">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <div class="section-label">La transformation</div>
+      <h2 class="section-title">Avant la formation vs. après</h2>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-col before">
+        <div class="ba-label">❌ Aujourd'hui</div>
+        <ul>
+          <li><span class="ico">💸</span> Vous payez plein tarif des vidéos IA en agence</li>
+          <li><span class="ico">🔍</span> Impossible d'évaluer si le prix est justifié</li>
+          <li><span class="ico">📅</span> 2-3 semaines d'attente entre le brief et le livrable</li>
+          <li><span class="ico">🔗</span> Dépendance totale : chaque vidéo = un bon de commande</li>
+          <li><span class="ico">❓</span> Vous ne savez pas quand l'IA suffit et quand il faut tourner</li>
+        </ul>
+      </div>
+      <div class="ba-col after">
+        <div class="ba-label">✅ Après la formation</div>
+        <ul>
+          <li><span class="ico">🎯</span> Vous produisez en interne ou vous challengez vos prestataires</li>
+          <li><span class="ico">💰</span> Vous savez exactement ce que vaut une vidéo IA (et son vrai coût)</li>
+          <li><span class="ico">⚡</span> De l'idée à la publication en quelques jours</li>
+          <li><span class="ico">📈</span> Vous multipliez par 4 votre volume de contenu vidéo</li>
+          <li><span class="ico">🧠</span> Vous connaissez les vrais usages, limites et contraintes légales</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     RÉSULTATS — Deux angles : piloter mieux OU produire plus
+     ═══════════════════════════════════════════════════════ -->
+<section class="solution">
+  <div class="container">
+    <div class="section-label">Ce que vous gagnez concrètement</div>
+    <h2 class="section-title">Que vous produisiez ou que vous commandiez, vous reprenez le contrôle</h2>
+    <p class="section-subtitle">Deux types de résultats selon votre objectif — mais un même bénéfice : arrêter de naviguer à vue.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="metric">÷5</div>
+        <div class="metric-label">le coût si vous produisez en interne</div>
+        <p>Ce qui coûtait 5 000-10 000 € en agence, votre équipe le produit en quelques jours avec les bons outils. Vous gardez le budget pour les projets qui nécessitent vraiment un tournage.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="metric">100%</div>
+        <div class="metric-label">de lucidité sur vos devis agence</div>
+        <p>Vous savez combien de temps prend réellement une vidéo IA, avec quels outils, et à quel coût. Vous challengez les devis avec des arguments concrets — ou vous validez en connaissance de cause.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="metric">Clarté</div>
+        <div class="metric-label">sur les vrais usages et les limites</div>
+        <p>L'IA fait des choses spectaculaires — et d'autres mal. Vous saurez exactement quand l'utiliser, quand tourner, et quand combiner les deux. C'est ça qui fait la différence dans une stratégie de contenu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 32px;">
+      <div class="section-label">En 2 minutes</div>
+      <h2 class="section-title">Voyez ce que nos stagiaires produisent</h2>
+    </div>
+    <div style="max-width:720px;margin:0 auto;">
+      <div style="position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.12);">
+        <iframe src="https://player.vimeo.com/video/1152502106?badge=0&autopause=0&player_id=0&app_id=58479&loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Présentation Les Inarrêtables"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     3 FORMATS — Adaptés au besoin et au temps disponible
+     ═══════════════════════════════════════════════════════ -->
+<section class="formats">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <div class="section-label">Choisissez votre format</div>
+      <h2 class="section-title">3 formats, un seul objectif : l'autonomie</h2>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">Chaque format est 100% pratique. Vous repartez avec des créations réelles, pas des slides.</p>
+    </div>
+    <div class="formats-grid">
+      <!-- 1 JOUR — COMPRENDRE & PILOTER -->
+      <div class="format-card">
+        <div class="format-duration">1 jour — 7 heures</div>
+        <h3>Comprendre & Piloter</h3>
+        <p class="format-hook">« Je veux savoir ce que l'IA fait vraiment, ses limites, et pouvoir challenger mes prestataires en connaissance de cause. »</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Ce que l'IA fait bien, ce qu'elle fait mal (avec démos live)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Le vrai coût d'une vidéo IA vs. production classique</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Créer vos premières images et clips (mains dans le cambouis)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Quand commander en agence vs. quand faire en interne</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Cadre légal : droits d'auteur, EU AI Act, usage commercial</li>
+        </ul>
+        <a href="https://tidycal.com/les-inarretables/session-decouverte-ia-generative-and-strategie-digitale-m82kdyr" class="format-cta">En savoir plus</a>
+      </div>
+      <!-- 3 JOURS — PRODUIRE EN INTERNE -->
+      <div class="format-card featured">
+        <div class="format-duration">3 jours — 21 heures</div>
+        <h3>Produire en interne</h3>
+        <p class="format-hook">« Je veux que mon équipe produise ses propres vidéos pro chaque semaine, sans passer par une agence. »</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Tout le programme 1 jour, en profondeur</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Scénariser avec l'IA (ChatGPT, Claude)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Montage complet & post-production IA</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Musique & sound design IA (Suno, Udio)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Réalisation complète d'un projet vidéo pro</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Workflow reproductible que votre équipe garde</li>
+        </ul>
+        <a href="https://tidycal.com/les-inarretables/session-decouverte-ia-generative-and-strategie-digitale-m82kdyr" class="format-cta">En savoir plus</a>
+      </div>
+      <!-- 5 JOURS — AUTONOMIE + STRATÉGIE -->
+      <div class="format-card">
+        <div class="format-duration">5 jours — 35 heures</div>
+        <h3>Autonomie & Stratégie</h3>
+        <p class="format-hook">« Je veux internaliser la production ET bâtir une stratégie vidéo IA pour les 6 prochains mois. »</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Tout le programme 3 jours, approfondi</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Court-métrage promotionnel de A à Z</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Direction artistique & identité visuelle IA</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Stratégie de contenu vidéo multi-canal</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Calendrier éditorial vidéo sur 3 mois</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Accompagnement post-formation (30 jours)</li>
+        </ul>
+        <a href="https://tidycal.com/les-inarretables/session-decouverte-ia-generative-and-strategie-digitale-m82kdyr" class="format-cta">En savoir plus</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTILS -->
+<section class="tools">
+  <div class="tools-inner">
+    <p class="tools-label">Les outils que vos équipes maîtriseront</p>
+    <div class="tools-grid">
+      <span class="tool-chip">🎬 Runway Gen-3</span>
+      <span class="tool-chip">🎥 Kling AI</span>
+      <span class="tool-chip">🖼️ Midjourney</span>
+      <span class="tool-chip">🎨 Flux</span>
+      <span class="tool-chip">🎵 Suno</span>
+      <span class="tool-chip">🗣️ ElevenLabs</span>
+      <span class="tool-chip">🤖 ChatGPT</span>
+      <span class="tool-chip">🧠 Claude</span>
+      <span class="tool-chip">✂️ CapCut</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     TÉMOIGNAGES — Anonymisés, axés sur le ROI business
+     ═══════════════════════════════════════════════════════ -->
+<section class="testimonials">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <div class="section-label">Retours terrain</div>
+      <h2 class="section-title">Ce que nos participants disent le plus souvent</h2>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">Retours anonymisés de professionnels du marketing et de la communication formés chez nous.</p>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>« En 3 jours, j'ai produit un clip promo que mon agence m'aurait facturé 8 000 €. Mon DG n'en revenait pas. »</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="author-info">
+            <div class="name">Responsable communication</div>
+            <div class="role">Secteur événementiel — 45 collaborateurs</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>« On publiait 2 vidéos par mois. Maintenant on en fait 8. Notre engagement LinkedIn a triplé en 2 mois. »</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="author-info">
+            <div class="name">Directrice marketing</div>
+            <div class="role">Secteur e-commerce — 120 collaborateurs</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>« Je n'avais jamais touché à un logiciel de montage. Après 1 jour de formation, j'ai créé la vidéo de lancement de notre nouveau produit. »</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="author-info">
+            <div class="name">Chef de projet digital</div>
+            <div class="role">Secteur retail — PME 60 collaborateurs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<section class="compliance">
+  <div class="container">
+    <div class="compliance-inner">
+      <div class="compliance-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="compliance-body">
+        <h3>Contenu IA & conformité : on vous forme aux bonnes pratiques</h3>
+        <p>Publier du contenu généré par IA engage votre marque. On vous apprend les règles : droits d'auteur, usage commercial, transparence (EU AI Act 2025), protection des données (RGPD). Votre équipe produit en toute sécurité juridique — un avantage que vos concurrents n'ont pas encore.</p>
+        <div class="compliance-badges">
+          <div class="compliance-badge">
+            <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            RGPD conforme
+          </div>
+          <div class="compliance-badge">
+            <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            EU AI Act 2025
+          </div>
+          <div class="compliance-badge">
+            <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            Droits d'auteur & IA
+          </div>
+          <div class="compliance-badge">
+            <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            Usage commercial sécurisé
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <div class="section-label">Questions fréquentes</div>
+      <h2 class="section-title">Tout ce que vous devez savoir</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Mon équipe n'a aucune compétence vidéo. C'est un problème ?</summary>
+        <p>Au contraire, c'est exactement pour ça que la formation existe. L'IA supprime la barrière technique. Si vos collaborateurs savent rédiger un brief ou un email, ils peuvent créer une vidéo professionnelle. On part de votre niveau réel.</p>
+      </details>
+      <details class="faq-item">
+        <summary>La qualité sera-t-elle suffisante pour représenter notre marque ?</summary>
+        <p>Oui. Les outils actuels (Runway, Kling, Midjourney) produisent des résultats de qualité broadcast. Nos clients les utilisent pour des vidéos LinkedIn, Instagram, des présentations clients et même des spots publicitaires. On vous montre un exemple concret pendant la session découverte.</p>
+      </details>
+      <details class="faq-item">
+        <summary>1, 3 ou 5 jours : comment choisir ?</summary>
+        <p>1 jour pour comprendre le potentiel et repartir avec vos premières créations. 3 jours pour que votre équipe soit autonome avec un workflow complet. 5 jours pour bâtir une véritable stratégie de contenu vidéo interne avec calendrier éditorial et accompagnement. On en discute pendant la session découverte.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Est-ce que la formation se fait dans nos locaux ?</summary>
+        <p>Les deux sont possibles. En inter-entreprise à Paris (61 rue de Lyon, 75012) ou en intra dans vos locaux. Le format intra permet d'adapter les exercices à vos cas concrets (vos produits, votre charte graphique, vos besoins de com).</p>
+      </details>
+      <details class="faq-item">
+        <summary>Peut-on utiliser les vidéos IA commercialement ?</summary>
+        <p>C'est un point clé de la formation. On vous explique quels outils permettent un usage commercial, comment documenter vos créations IA, et comment rester conforme au cadre européen (EU AI Act). Vous repartez avec un cadre d'utilisation clair pour votre entreprise.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Comment se passe le financement ?</summary>
+        <p>Nous établissons un devis et une convention de formation. Votre entreprise peut financer directement ou passer par ses dispositifs internes. On vous accompagne dans les démarches administratives.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <h2>Vous commandez des vidéos IA sans savoir ce que vous achetez ?</h2>
+    <p class="desc">Réservez 20 minutes avec nous. On vous montre concrètement ce que l'IA peut (et ne peut pas) faire pour votre com — et on identifie le format adapté à votre besoin.</p>
+    <div class="urgency"><span class="dot-red"></span> 4 créneaux disponibles cette semaine</div>
+    <br>
+    <a href="https://tidycal.com/les-inarretables/session-decouverte-ia-generative-and-strategie-digitale-m82kdyr" class="btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Réserver ma session découverte
+    </a>
+    <p class="final-note">Gratuit · 20 minutes · Sans engagement</p>
+    <div class="guarantee">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Vos données restent confidentielles · Aucun spam
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Les Inarrêtables</strong> — Formations IA Générative & Audiovisuel · 61 rue de Lyon, 75012 Paris</p>
+  <p style="margin-top:4px;">07 69 32 14 28 · <a href="mailto:info@lesinarretables.com" style="color:var(--blue);text-decoration:none;">info@lesinarretables.com</a></p>
+  <p style="margin-top:8px;font-style:italic;color:var(--gray-400);">Tout peut s'apprendre. La connaissance nous rend inarrêtables.</p>
+  <div class="legal-links">
+    <a href="/mentions-legales.html">Mentions légales</a>
+    <a href="/politique-confidentialite.html">Politique de confidentialité</a>
+    <a href="/cgv.html">CGV</a>
+  </div>
+  <p class="rgpd-note">Ce site ne dépose aucun cookie et ne collecte aucune donnée personnelle. Polices hébergées en UE (Bunny Fonts). Conforme RGPD & EU AI Act.</p>
+</footer>
+
+</body>
+</html>
