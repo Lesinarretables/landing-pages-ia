@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Votre Diagnostic IA Video | Les Inarretables</title>
+<link rel="icon" type="image/webp" href="/images/favicon.webp">
+<link href="https://fonts.bunny.net/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#F8FAFC;font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;}
+
+.sc{max-width:390px;margin:0 auto;padding:0;background:#F8FAFC;min-height:100vh;position:relative;}
+
+/* Loader */
+.sc-loader{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:16px;}
+.sc-loader-ring{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#3DBFB0;border-radius:50%;animation:spin .8s linear infinite;}
+.sc-loader p{font-size:14px;color:#94A3B8;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* Bulle video */
+.sc-bubble{position:absolute;top:14px;right:14px;width:64px;height:64px;border-radius:50%;overflow:hidden;background:#0F1B2D;z-index:10;cursor:pointer;border:2.5px solid #3DBFB0;box-shadow:0 3px 14px rgba(61,191,176,.3);transition:all .35s cubic-bezier(.4,0,.2,1);}
+.sc-bubble video{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.sc-bubble-pulse{position:absolute;inset:-2.5px;border-radius:50%;border:2px solid #3DBFB0;animation:bpulse 2s ease-out infinite;opacity:0;}
+@keyframes bpulse{0%{transform:scale(1);opacity:.5;}100%{transform:scale(1.3);opacity:0;}}
+.sc-bubble-label{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);background:#3DBFB0;color:#fff;font-size:8px;font-weight:700;padding:2px 6px;border-radius:8px;white-space:nowrap;}
+.sc-bubble-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);}
+.sc-bubble-inner i{font-size:22px;}
+.sc-bubble.expanded{width:220px;height:220px;border-radius:14px;top:10px;right:10px;box-shadow:0 8px 40px rgba(0,0,0,.4),0 0 0 2px #3DBFB0;}
+.sc-bubble.expanded video{border-radius:14px;}
+.sc-bubble.expanded .sc-bubble-pulse,.sc-bubble.expanded .sc-bubble-label{display:none;}
+.sc-bubble.expanded .sc-bubble-close{display:flex;}
+.sc-bubble-close{display:none;position:absolute;top:6px;right:6px;width:26px;height:26px;background:rgba(0,0,0,.5);border-radius:50%;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700;cursor:pointer;z-index:5;}
+
+/* Body */
+.sc-body{padding:16px 16px 28px;}
+
+/* Header */
+.sc-header{margin-bottom:14px;padding-right:72px;}
+.sc-badge{display:inline-flex;align-items:center;gap:5px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:50px;padding:4px 12px;font-size:11px;font-weight:700;color:#3DBFB0;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.sc-title{font-size:18px;font-weight:800;color:#0F1B2D;margin:0 0 4px;line-height:1.25;letter-spacing:-.3px;}
+.sc-info{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11px;color:#94A3B8;}
+.sc-info i{font-size:11px;vertical-align:-1px;margin-right:2px;}
+
+/* Pills */
+.sc-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.sc-pill{background:rgba(61,191,176,.08);color:#2FA89A;font-size:11px;font-weight:700;padding:5px 12px;border-radius:50px;border:1px solid rgba(61,191,176,.2);}
+
+/* Cards */
+.sc-card{background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px;padding:14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.03);}
+.sc-card-title{font-size:13px;font-weight:800;color:#0F1B2D;margin:0 0 6px;text-align:center;letter-spacing:-.2px;}
+.sc-card-text{font-size:12px;color:#64748B;line-height:1.5;margin:0;text-align:center;}
+
+/* Scores */
+.sc-scores-row{display:flex;gap:6px;margin-bottom:10px;}
+.sc-score-box{flex:1;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:10px;padding:10px 6px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.03);}
+.sc-score-num{font-size:22px;font-weight:800;margin:0;line-height:1;}
+.sc-score-label{font-size:9px;color:#94A3B8;margin:4px 0 0;text-transform:uppercase;letter-spacing:.5px;font-weight:600;}
+.sc-score-bar{height:3px;border-radius:2px;background:#E2E8F0;margin:6px auto 0;width:80%;overflow:hidden;}
+.sc-score-fill{height:100%;border-radius:2px;}
+
+/* Donut */
+.sc-donut-section{display:flex;align-items:center;gap:12px;}
+.sc-donut-wrap{flex-shrink:0;position:relative;width:100px;height:100px;}
+.sc-donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.sc-donut-pct{font-size:10px;font-weight:800;color:#3DBFB0;margin:0;line-height:1;}
+.sc-donut-sub{font-size:8px;color:#94A3B8;margin:2px 0 0;text-transform:uppercase;font-weight:600;}
+.sc-donut-legend{display:flex;flex-direction:column;gap:5px;flex:1;}
+.sc-donut-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#64748B;}
+.sc-donut-dot{width:7px;height:7px;border-radius:2px;flex-shrink:0;}
+.sc-donut-you{color:#0F1B2D;font-weight:700;}
+
+/* Gap analysis */
+.sc-gaps{display:flex;flex-direction:column;gap:6px;}
+.sc-gap{display:flex;align-items:center;gap:10px;}
+.sc-gap-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.sc-gap-content{flex:1;min-width:0;}
+.sc-gap-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:3px;}
+.sc-gap-label{font-size:12px;color:#334155;font-weight:600;margin:0;}
+.sc-gap-vals{display:flex;align-items:center;gap:3px;font-size:11px;}
+.sc-gap-now{color:#E24B4A;font-weight:600;}
+.sc-gap-target{color:#059669;font-weight:700;}
+.sc-gap-bar{height:4px;border-radius:2px;background:#E2E8F0;position:relative;}
+.sc-gap-fill{height:100%;border-radius:2px;position:absolute;left:0;top:0;}
+
+/* Priorities */
+.sc-pri{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid #F1F5F9;}
+.sc-pri:last-child{border-bottom:none;}
+.sc-pri-num{width:22px;height:22px;border-radius:50%;background:rgba(61,191,176,.1);color:#3DBFB0;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sc-pri-text{font-size:12px;color:#334155;line-height:1.4;margin:0;padding-top:2px;}
+
+/* CTA */
+.sc-cta{display:block;width:100%;text-align:center;background:#3DBFB0;color:#FFFFFF;font-size:15px;font-weight:700;padding:14px;border-radius:10px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 4px 14px rgba(61,191,176,.3);}
+.sc-cta-note{text-align:center;font-size:11px;color:#94A3B8;margin-top:8px;}
+
+/* Situation snapshot */
+.sc-snap{display:flex;flex-direction:column;gap:4px;margin-top:8px;}
+.sc-snap-line{display:flex;align-items:center;gap:8px;font-size:11px;color:#334155;}
+.sc-snap-icon{width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;background:rgba(61,191,176,.08);color:#3DBFB0;}
+
+/* Cout inaction */
+.sc-inaction{background:linear-gradient(135deg,#FEF2F2,#FFF7ED);border:1px solid #FECACA;border-radius:10px;padding:12px;margin-bottom:10px;text-align:center;}
+.sc-inaction-amount{font-size:20px;font-weight:800;color:#DC2626;margin:0;line-height:1.2;}
+.sc-inaction-label{font-size:10px;color:#94A3B8;text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin:0 0 4px;}
+.sc-inaction-detail{font-size:11px;color:#92400E;margin:4px 0 0;}
+
+/* ROI */
+.sc-roi{display:flex;gap:6px;margin-bottom:10px;}
+.sc-roi-box{flex:1;background:#F0FDF4;border:1px solid #A7F3D0;border-radius:10px;padding:8px 6px;text-align:center;}
+.sc-roi-num{font-size:14px;font-weight:800;color:#059669;margin:0;line-height:1.2;}
+.sc-roi-label{font-size:8px;color:#6B7280;margin:3px 0 0;text-transform:uppercase;letter-spacing:.3px;font-weight:600;}
+
+/* Formation */
+.sc-formation{background:linear-gradient(135deg,#0F1B2D,#1A2B45);border-radius:12px;padding:14px;margin-bottom:10px;color:#fff;}
+.sc-formation-badge{display:inline-block;background:rgba(61,191,176,.15);color:#3DBFB0;font-size:9px;font-weight:700;padding:3px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.sc-formation-name{font-size:14px;font-weight:800;margin:0 0 2px;color:#fff;}
+.sc-formation-duree{font-size:11px;color:#94A3B8;margin:0 0 10px;}
+.sc-formation-points{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;}
+.sc-formation-points li{font-size:11px;color:#CBD5E1;display:flex;align-items:flex-start;gap:6px;line-height:1.3;}
+.sc-formation-points li::before{content:'✓';color:#3DBFB0;font-weight:700;flex-shrink:0;}
+
+/* Footer */
+.sc-footer{text-align:center;padding:16px;font-size:10px;color:#94A3B8;}
+.sc-footer a{color:#94A3B8;text-decoration:none;margin:0 6px;}
+
+/* Error */
+.sc-error{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:12px;padding:32px;text-align:center;}
+.sc-error h2{font-size:18px;color:#0F1B2D;margin:0;}
+.sc-error p{font-size:14px;color:#64748B;margin:0;}
+</style>
+</head>
+<body>
+
+<div class="sc" id="sc-root">
+  <div class="sc-loader" id="loader">
+    <div class="sc-loader-ring"></div>
+    <p>Chargement de votre diagnostic...</p>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+var WORKER_URL = "https://diagnostic-ia.quiet-night-9efd.workers.dev";
+
+async function loadResult() {
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get("r");
+  if (!id) { showError("Aucun diagnostic a afficher", "Verifiez le lien recu par email."); return; }
+
+  try {
+    var res = await fetch(WORKER_URL + "/result/" + id);
+    if (!res.ok) throw new Error("Not found");
+    var data = await res.json();
+
+    // Si pas de scorecard data, la generer
+    if (!data.scorecard) {
+      try {
+        var scRes = await fetch(WORKER_URL + "/scorecard", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ history: data.history, profile: data.profile, scores: data.scores, prenom: data.prenom })
+        });
+        if (scRes.ok) {
+          data.scorecard = await scRes.json();
+          // Sauvegarder pour les prochaines visites
+          fetch(WORKER_URL + "/update-result", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: id, updates: { scorecard: data.scorecard } })
+          }).catch(function(){});
+        }
+      } catch (e) { console.log("Scorecard generation error:", e); }
+    }
+
+    renderScorecard(data);
+  } catch (e) {
+    showError("Diagnostic introuvable", "Ce lien a peut-etre expire ou est invalide.");
+  }
+}
+
+function showError(title, text) {
+  document.getElementById("sc-root").innerHTML =
+    '<div class="sc-error"><h2>' + title + '</h2><p>' + text + '</p>' +
+    '<a href="https://formations.lesinarretables.com/diagnostic-video-ia.html" style="margin-top:16px;color:#3DBFB0;font-weight:600;">Refaire le diagnostic</a></div>';
+}
+
+function renderScorecard(data) {
+  var profile = data.profile || "producteur";
+  var scores = data.scores || { pilote: 0, producteur: 0, stratege: 0 };
+  var prenom = data.prenom || "";
+  var entreprise = data.entreprise || "";
+  var video_url = data.video_url || "";
+  var thumbnail_url = data.thumbnail_url || "";
+  var sc = data.scorecard || {};
+  var date = new Date(data.savedAt || Date.now()).toLocaleDateString("fr-FR");
+
+  var profileNames = { pilote: "Pilote", producteur: "Producteur", stratege: "Stratege" };
+  var profileName = profileNames[profile] || "Producteur";
+
+  // Scores normalises sur 100
+  var total = (scores.pilote || 0) + (scores.producteur || 0) + (scores.stratege || 0);
+  var pPilote = total > 0 ? Math.round((scores.pilote / total) * 100) : 33;
+  var pProd = total > 0 ? Math.round((scores.producteur / total) * 100) : 33;
+  var pStrat = total > 0 ? Math.round((scores.stratege / total) * 100) : 34;
+
+  // Positionnement marche
+  var topPct = profile === "stratege" ? "Top 8%" : profile === "producteur" ? "Top 28%" : "Top 60%";
+
+  // Scorecard data (from AI or defaults)
+  var insightTitle = sc.insight_title || "Diagnostic termine";
+  var insightText = sc.insight_text || "Votre profil IA video a ete analyse avec succes.";
+  var pillObjectif = sc.pill_objectif || "autonomie";
+  var pillUrgence = sc.pill_urgence || "3 mois";
+
+  // Situation
+  var sitLine1 = sc.situation_line1 || "2 videos/mois via agence externe";
+  var sitLine2 = sc.situation_line2 || "3 500€ par video produite";
+  var sitLine3 = sc.situation_line3 || "Equipe motivee mais non formee";
+
+  // Cout inaction
+  var inactionMontant = sc.cout_inaction_montant || "84 000€";
+  var inactionDetail = sc.cout_inaction_detail || "Cout annuel au rythme actuel";
+
+  // Gaps
+  var gapVideosNow = sc.gap_videos_now || "2";
+  var gapVideosTarget = sc.gap_videos_target || "10";
+  var gapVideosPct = sc.gap_videos_pct || 20;
+  var gapCoutNow = sc.gap_cout_now || "3 500€";
+  var gapCoutTarget = sc.gap_cout_target || "700€";
+  var gapCoutPct = sc.gap_cout_pct || 80;
+  var gapDelaiNow = sc.gap_delai_now || "3 sem.";
+  var gapDelaiTarget = sc.gap_delai_target || "2 jours";
+  var gapDelaiPct = sc.gap_delai_pct || 85;
+
+  // ROI
+  var roiEconomie = sc.roi_economie || "67 200€/an";
+  var roiMultiplicateur = sc.roi_multiplicateur || "x5 videos";
+  var roiAutonomie = sc.roi_autonomie || "3 jours";
+
+  // Formation
+  var formNom = sc.formation_nom || "Produire en Interne avec l'IA";
+  var formDuree = sc.formation_duree || "3 jours";
+  var formPt1 = sc.formation_point1 || "Produire des videos pro en autonomie";
+  var formPt2 = sc.formation_point2 || "Maitriser les outils IA video";
+  var formPt3 = sc.formation_point3 || "Creer un workflow de production efficace";
+
+  // Priorities + CTA
+  var pri1 = sc.priority_1 || "Formez votre equipe a la production IA video";
+  var pri2 = sc.priority_2 || "Internalisez vos formats recurrents";
+  var pri3 = sc.priority_3 || "Structurez votre workflow de publication";
+  var ctaText = sc.cta_text || "Reserver ma session decouverte";
+
+  // Donut legend — qui est "vous"
+  var youDebutant = profile === "pilote" ? ' — vous' : '';
+  var youActif = profile === "producteur" ? ' — vous' : '';
+  var youExpert = profile === "stratege" ? ' — vous' : '';
+
+  // Score box highlight
+  var hlPilote = profile === "pilote" ? ' style="border-color:rgba(59,130,246,.4);"' : '';
+  var hlProd = profile === "producteur" ? ' style="border-color:rgba(61,191,176,.4);"' : '';
+  var hlStrat = profile === "stratege" ? ' style="border-color:rgba(217,119,6,.4);"' : '';
+
+  // Bulle video
+  var bubbleHTML;
+  if (video_url) {
+    bubbleHTML =
+      '<div class="sc-bubble" id="sc-bubble" onclick="toggleBubble()">' +
+        '<div class="sc-bubble-pulse"></div>' +
+        '<video id="bubble-video" src="' + video_url + '" playsinline preload="metadata" muted loop' +
+        (thumbnail_url ? ' poster="' + thumbnail_url + '"' : '') + '></video>' +
+        '<span class="sc-bubble-label">★ Pour vous</span>' +
+        '<div class="sc-bubble-close" onclick="event.stopPropagation(); closeBubble()">✕</div>' +
+      '</div>';
+  } else {
+    bubbleHTML =
+      '<div class="sc-bubble">' +
+        '<div class="sc-bubble-pulse"></div>' +
+        '<div class="sc-bubble-inner"><i class="ti ti-user"></i></div>' +
+      '</div>';
+  }
+
+  document.getElementById("sc-root").innerHTML =
+    bubbleHTML +
+    '<div class="sc-body">' +
+
+      // HEADER
+      '<div class="sc-header">' +
+        '<div class="sc-badge"><i class="ti ti-check" style="font-size:11px"></i> Diagnostic ' + (data.isPremium ? 'Premium' : 'termine') + '</div>' +
+        '<h1 class="sc-title">' + prenom + ', votre profil IA video</h1>' +
+        '<div class="sc-info">' +
+          (entreprise ? '<span><i class="ti ti-building"></i>' + entreprise + '</span>' : '') +
+          '<span><i class="ti ti-calendar"></i>' + date + '</span>' +
+        '</div>' +
+      '</div>' +
+
+      // PILLS
+      '<div class="sc-pills">' +
+        '<span class="sc-pill">Profil ' + profileName + '</span>' +
+        '<span class="sc-pill">Objectif : ' + pillObjectif + '</span>' +
+        '<span class="sc-pill">Urgence : ' + pillUrgence + '</span>' +
+      '</div>' +
+
+      // INSIGHT + SITUATION SNAPSHOT
+      '<div class="sc-card">' +
+        '<p class="sc-card-title">' + insightTitle + '</p>' +
+        '<p class="sc-card-text">' + insightText + '</p>' +
+        '<div class="sc-snap">' +
+          '<div class="sc-snap-line"><div class="sc-snap-icon"><i class="ti ti-video"></i></div>' + sitLine1 + '</div>' +
+          '<div class="sc-snap-line"><div class="sc-snap-icon"><i class="ti ti-currency-euro"></i></div>' + sitLine2 + '</div>' +
+          '<div class="sc-snap-line"><div class="sc-snap-icon"><i class="ti ti-users"></i></div>' + sitLine3 + '</div>' +
+        '</div>' +
+      '</div>' +
+
+      // SCORES
+      '<div class="sc-scores-row">' +
+        '<div class="sc-score-box"' + hlPilote + '>' +
+          '<p class="sc-score-num" style="color:#3B82F6">' + pPilote + '</p>' +
+          '<p class="sc-score-label">Pilotage</p>' +
+          '<div class="sc-score-bar"><div class="sc-score-fill" style="width:' + pPilote + '%;background:#3B82F6;"></div></div>' +
+        '</div>' +
+        '<div class="sc-score-box"' + hlProd + '>' +
+          '<p class="sc-score-num" style="color:#3DBFB0">' + pProd + '</p>' +
+          '<p class="sc-score-label">Production</p>' +
+          '<div class="sc-score-bar"><div class="sc-score-fill" style="width:' + pProd + '%;background:#3DBFB0;"></div></div>' +
+        '</div>' +
+        '<div class="sc-score-box"' + hlStrat + '>' +
+          '<p class="sc-score-num" style="color:#D97706">' + pStrat + '</p>' +
+          '<p class="sc-score-label">Strategie</p>' +
+          '<div class="sc-score-bar"><div class="sc-score-fill" style="width:' + pStrat + '%;background:#D97706;"></div></div>' +
+        '</div>' +
+      '</div>' +
+
+      // DONUT
+      '<div class="sc-card">' +
+        '<p class="sc-card-title">Ou vous situez-vous ?</p>' +
+        '<div class="sc-donut-section" style="margin-top:8px;">' +
+          '<div class="sc-donut-wrap">' +
+            '<canvas id="donut2" width="100" height="100"></canvas>' +
+            '<div class="sc-donut-center">' +
+              '<p class="sc-donut-pct">' + topPct + '</p>' +
+              '<p class="sc-donut-sub">du marche</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="sc-donut-legend">' +
+            '<div class="sc-donut-item"><div class="sc-donut-dot" style="background:#E2E8F0"></div> 40% Debutants</div>' +
+            '<div class="sc-donut-item"><div class="sc-donut-dot" style="background:#94A3B8"></div> 32% Explorateurs</div>' +
+            '<div class="sc-donut-item' + (youActif ? ' sc-donut-you' : '') + '"><div class="sc-donut-dot" style="background:#3DBFB0"></div> 20% Actifs' + youActif + '</div>' +
+            '<div class="sc-donut-item' + (youExpert ? ' sc-donut-you' : '') + '"><div class="sc-donut-dot" style="background:#0F1B2D"></div> 8% Experts' + youExpert + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+
+      // GAP ANALYSIS
+      '<div class="sc-card">' +
+        '<p class="sc-card-title">Aujourd\'hui vs objectif</p>' +
+        '<div class="sc-gaps" style="margin-top:8px;">' +
+          '<div class="sc-gap">' +
+            '<div class="sc-gap-icon" style="background:rgba(226,75,74,.08);color:#E24B4A;"><i class="ti ti-video"></i></div>' +
+            '<div class="sc-gap-content">' +
+              '<div class="sc-gap-top"><span class="sc-gap-label">Videos / mois</span><div class="sc-gap-vals"><span class="sc-gap-now">' + gapVideosNow + '</span><span style="color:#94A3B8">→</span><span class="sc-gap-target">' + gapVideosTarget + '</span></div></div>' +
+              '<div class="sc-gap-bar"><div class="sc-gap-fill" style="width:' + gapVideosPct + '%;background:linear-gradient(90deg,#E24B4A,#D97706);"></div></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="sc-gap">' +
+            '<div class="sc-gap-icon" style="background:rgba(226,75,74,.08);color:#E24B4A;"><i class="ti ti-currency-euro"></i></div>' +
+            '<div class="sc-gap-content">' +
+              '<div class="sc-gap-top"><span class="sc-gap-label">Cout / video</span><div class="sc-gap-vals"><span class="sc-gap-now">' + gapCoutNow + '</span><span style="color:#94A3B8">→</span><span class="sc-gap-target">' + gapCoutTarget + '</span></div></div>' +
+              '<div class="sc-gap-bar"><div class="sc-gap-fill" style="width:' + gapCoutPct + '%;background:linear-gradient(90deg,#E24B4A,#D97706);"></div></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="sc-gap">' +
+            '<div class="sc-gap-icon" style="background:rgba(226,75,74,.08);color:#E24B4A;"><i class="ti ti-clock"></i></div>' +
+            '<div class="sc-gap-content">' +
+              '<div class="sc-gap-top"><span class="sc-gap-label">Delai</span><div class="sc-gap-vals"><span class="sc-gap-now">' + gapDelaiNow + '</span><span style="color:#94A3B8">→</span><span class="sc-gap-target">' + gapDelaiTarget + '</span></div></div>' +
+              '<div class="sc-gap-bar"><div class="sc-gap-fill" style="width:' + gapDelaiPct + '%;background:linear-gradient(90deg,#E24B4A,#D97706);"></div></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+
+      // COUT INACTION
+      '<div class="sc-inaction">' +
+        '<p class="sc-inaction-label">Cout annuel si rien ne change</p>' +
+        '<p class="sc-inaction-amount">' + inactionMontant + '</p>' +
+        '<p class="sc-inaction-detail">' + inactionDetail + '</p>' +
+      '</div>' +
+
+      // ROI
+      '<div class="sc-roi">' +
+        '<div class="sc-roi-box">' +
+          '<p class="sc-roi-num">' + roiEconomie + '</p>' +
+          '<p class="sc-roi-label">Economie</p>' +
+        '</div>' +
+        '<div class="sc-roi-box">' +
+          '<p class="sc-roi-num">' + roiMultiplicateur + '</p>' +
+          '<p class="sc-roi-label">Volume</p>' +
+        '</div>' +
+        '<div class="sc-roi-box">' +
+          '<p class="sc-roi-num">' + roiAutonomie + '</p>' +
+          '<p class="sc-roi-label">Autonomie</p>' +
+        '</div>' +
+      '</div>' +
+
+      // PRIORITIES
+      '<div class="sc-card">' +
+        '<p class="sc-card-title">Vos 3 priorites immediates</p>' +
+        '<div class="sc-priorities" style="margin-top:6px;">' +
+          '<div class="sc-pri"><div class="sc-pri-num">1</div><p class="sc-pri-text">' + pri1 + '</p></div>' +
+          '<div class="sc-pri"><div class="sc-pri-num">2</div><p class="sc-pri-text">' + pri2 + '</p></div>' +
+          '<div class="sc-pri"><div class="sc-pri-num">3</div><p class="sc-pri-text">' + pri3 + '</p></div>' +
+        '</div>' +
+      '</div>' +
+
+      // FORMATION
+      '<div class="sc-formation">' +
+        '<span class="sc-formation-badge">Formation recommandee</span>' +
+        '<p class="sc-formation-name">' + formNom + '</p>' +
+        '<p class="sc-formation-duree"><i class="ti ti-clock" style="font-size:12px;vertical-align:-1px;margin-right:3px;"></i>' + formDuree + '</p>' +
+        '<ul class="sc-formation-points">' +
+          '<li>' + formPt1 + '</li>' +
+          '<li>' + formPt2 + '</li>' +
+          '<li>' + formPt3 + '</li>' +
+        '</ul>' +
+      '</div>' +
+
+      // CTA
+      '<a class="sc-cta" href="/offre.html?r=' + (new URLSearchParams(window.location.search).get("r") || "") + '">' + ctaText + ' <i class="ti ti-arrow-right" style="font-size:14px;vertical-align:-2px"></i></a>' +
+      '<p class="sc-cta-note">Votre programme sur mesure · Prise de RDV directe</p>' +
+
+    '</div>' +
+
+    // FOOTER
+    '<div class="sc-footer">' +
+      '<p><strong>Les Inarretables</strong> — Formations IA Generative</p>' +
+      '<a href="/mentions-legales.html">Mentions legales</a>' +
+      '<a href="/politique-confidentialite.html">Confidentialite</a>' +
+      '<a href="/cgv.html">CGV</a>' +
+    '</div>';
+
+  // Init donut
+  setTimeout(function() {
+    var c = document.getElementById('donut2');
+    if (c) {
+      new Chart(c.getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: ['Debutants','Explorateurs','Actifs','Experts'],
+          datasets: [{ data: [40,32,20,8], backgroundColor: ['#E2E8F0','#94A3B8','#3DBFB0','#0F1B2D'], borderWidth: 2, borderColor: '#FFFFFF' }]
+        },
+        options: { responsive: false, cutout: '62%', plugins: { legend: { display: false }, tooltip: { enabled: false } } }
+      });
+    }
+  }, 100);
+
+  // Init video
+  if (video_url) {
+    setTimeout(function() {
+      var v = document.getElementById('bubble-video');
+      if (v) v.play().catch(function(){});
+    }, 500);
+  }
+}
+
+function toggleBubble() {
+  var b = document.getElementById('sc-bubble');
+  var v = document.getElementById('bubble-video');
+  if (!b || b.classList.contains('expanded')) return;
+  b.classList.add('expanded');
+  v.muted = false; v.currentTime = 0; v.loop = false; v.play();
+}
+function closeBubble() {
+  var b = document.getElementById('sc-bubble');
+  var v = document.getElementById('bubble-video');
+  if (!b) return;
+  b.classList.remove('expanded');
+  v.muted = true; v.loop = true; v.play().catch(function(){});
+}
+
+loadResult();
+</script>
+</body>
+</html>
